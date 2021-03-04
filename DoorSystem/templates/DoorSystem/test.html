@@ -1,0 +1,32 @@
+<html>
+<head>
+	<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+	<script>
+		var messageList = [];
+		var client = mqtt.connect('wss://public:public@public.cloud.shiftr.io', {
+		    clientId: 'javascript'
+		});
+
+    client.on('connect', function() {
+        console.log('connected!');
+        client.subscribe('/try/IoTSystem');
+    });
+
+    client.on('message', function(topic, message) {
+        console.log(topic + ': ' + message.toString());
+  	});
+
+    function sendToArduino(message) {
+  		client.publish("/try/IoTSystem", message);
+    }
+	</script>
+</head>
+<body>
+	<h3>Aktiver fjernsystem:</h3><br>
+	Navn->&nbsp<input id="navneboks"><button onclick=sendToArduino(document.getElementById("navneboks").value)>Aktiver</button><br>
+
+	<h3>Beskeder:</H3>
+	<div id="msgList"> </div>
+
+</body>
+</html>
