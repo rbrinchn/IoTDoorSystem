@@ -1,87 +1,32 @@
+{% extends 'DoorSystem/admin-template.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Startside</title>
-    <link rel="stylesheet" href="{% static 'DoorSystem/assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="{% static 'DoorSystem/assets/fonts/fontawesome-all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'DoorSystem/assets/fonts/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'DoorSystem/assets/fonts/fontawesome5-overrides.min.css' %}">
-    <link rel="stylesheet" href="{% static 'DoorSystem/assets/css/untitled.css' %}">
-</head>
+{# Adds the active class to the correct navigation sidebar #}
+{% block nav_dashboard %}active{% endblock %}
 
-<body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon"><i class="fas fa-door-open mt-4" style="font-size: 2.5rem !important;"></i></div>
-                    <div class="sidebar-brand-text mx-3 d-none"><span>Brand</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light mt-4" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fa fa-unlock-alt" style="font-size: 18px;"></i><span class="text-lg ml-0 ml-lg-2">Funktioner</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user" style="font-size: 18px;"></i><span class="text-lg ml-0 ml-lg-2">Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="table.html"><i class="fa fa-users" style="font-size: 18px;"></i><span class="text-lg ml-0 ml-lg-2">Brugere</span></a></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
-            </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <ul class="navbar-nav flex-nowrap ml-auto">
-                            <div class="d-none d-sm-block topbar-divider"></div>
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Rasmus Brinch-Nielsen</span></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="container-fluid">
-                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Startsside</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xl-3 mb-4 mx-auto">
-                            <div class="card shadow border-left-primary py-2 mx-auto" style="width: 250px;">
-                                <div class="card-body" style="padding-left: 1.25rem !important; padding-right: 1.25rem !important; padding-bottom: 0.25rem; padding-top: 0.25rem;">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col mr-2">
-                                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1" style="font-size: 14px;"><span>ÅBen hoveddøren<br>i 5 sekunder<br></span></div>
-                                            <div class="text-dark font-weight-bold h5 mb-0 text-center mt-4"><button class="btn btn-primary shadow-lg" type="button" style="width: 130px;" onclick="sendToArduino(&quot;open&quot;)">Lås op</button></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-unlock-alt fa-3x text-gray-300"></i></div>
-                                    </div>
-                                </div>
+{% block content %}
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-dark mb-0">Dashboard</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xl-3 mb-4 mx-auto">
+            <div class="card shadow border-left-primary py-2 mx-auto" style="width: 250px;">
+                <div class="card-body" style="padding-left: 1.25rem !important; padding-right: 1.25rem !important; padding-bottom: 0.25rem; padding-top: 0.25rem;">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1" style="font-size: 14px;">
+                                <span>Åben hoveddøren<br>i 5 sekunder<br></span>
                             </div>
+                            <div class="text-dark font-weight-bold h5 mb-0 text-center mt-4">
+                                <button class="btn btn-primary shadow-lg" type="button" style="width: 130px;" onclick="sendToArduino(&quot;open&quot;)">Lås op</button>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <img id="lock" src="{% static 'DoorSystem/assets/gifs/lock-2.gif' %}" width="50px">
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Rasmus Brinch-Nielsen 2021</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
     </div>
-    <script src="{% static 'DoorSystem/assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'DoorSystem/assets/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-    <script src="{% static 'DoorSystem/assets/js/script.js' %}"></script>
-    <script src="{% static 'DoorSystem/assets/js/theme.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}

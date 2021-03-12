@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Startside</title>
+    <link rel="stylesheet" href="{% static 'DoorSystem/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'DoorSystem/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/assets/css/untitled.css' %}">
+    <link rel="icon" href="{% static 'DoorSystem/essentiels/door-open.png' %}" type="image/png" color="#fff">
+
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav id="nav" class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon"><i class="fas fa-door-open mt-4" style="font-size: 2.5rem !important;"></i></div>
+                    <div class="sidebar-brand-text mx-3 d-none"><span>Brand</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light mt-4" id="accordionSidebar">
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_dashboard %}{% endblock %}" href="{% url 'dashboard' %}">
+                            <i class="fa fa-unlock-alt" style="font-size: 18px;"></i>
+                            <span class="text-lg ml-0 ml-lg-2">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_users %}{% endblock %}" href="{% url 'user_overview' %}">
+                            <i class="fa fa-users" style="font-size: 18px;"></i>
+                            <span class="text-lg ml-0 ml-lg-2">Brugere</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% block nav_virtual_keys %}{% endblock %}" href="{% url 'keys_overview' %}">
+                            <i class="fa fa-key" style="font-size: 18px;"></i>
+                            <span class="text-lg ml-0 ml-lg-2">Virtuel keys</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="navbar-nav flex-nowrap ml-auto">
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ request.user.get_full_name }}</span>
+                                    </a>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
+{#                                        <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>#}
+{#                                        <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>#}
+                                        <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    {# THIS IS PRIMARY WHERE ALL CONTENT GOES. CONTENT IS LOADED USING BUILT-IN DJANGO FEATURES #}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    {# Look in DoorSystem/Modal-Content to edit content #}
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                    {# <button type="button" class="btn btn-primary">Save changes</button>#}
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Rasmus Brinch-Nielsen 2021</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="{% static 'DoorSystem/assets/js/jquery.min.js' %}"></script>
+    <script>
+        {# Toogles sidebar #}
+        {# Needs to run before other scrips, otherwise it flicks #}
+        pixels = document.body.clientWidth;
+        if (pixels < 768) {
+            console.log("TRUE");
+            $("#nav").toggleClass("toggled");
+            $("#page-top").toggleClass("sidebar-toggled");
+        }
+    </script>
+    <script src="{% static 'DoorSystem/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="{% static 'DoorSystem/assets/js/script.js' %}"></script>
+    <script src="{% static 'DoorSystem/assets/js/theme.js' %}"></script>
+    <script>
+        function AddUser() {
+            let xhr = new XMLHttpRequest();
+            // Call back function
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    document.getElementById("modal").innerHTML = xhr.responseText; // xhr.responseText;
+                    $('#modal').modal('toggle');
+                }
+            };
+            let url_mask = "{% url 'new_user' %}"; // Manipulator
+            xhr.open('GET', url_mask);
+            xhr.send();
+        }
+
+        function EditUser(userID) {
+            let xhr = new XMLHttpRequest();
+            // Call back function
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    document.getElementById("modal").innerHTML = xhr.responseText; // xhr.responseText;
+                    $('#modal').modal('toggle');
+                }
+            };
+            let url_mask = "{% url 'edit_user' 12345 %}".replace(12345, userID); // Manipulator
+            xhr.open('GET', url_mask);
+            xhr.send();
+        }
+
+        function AddKey() {
+            let xhr = new XMLHttpRequest();
+            // Call back function
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    document.getElementById("modal").innerHTML = xhr.responseText; // xhr.responseText;
+                    $('#modal').modal('toggle');
+                }
+            };
+            let url_mask = "{% url 'new_key' %}"; // Manipulator
+            xhr.open('GET', url_mask);
+            xhr.send();
+        }
+
+        function EditKey(keyID) {
+            let xhr = new XMLHttpRequest();
+            // Call back function
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    document.getElementById("modal").innerHTML = xhr.responseText; // xhr.responseText;
+                    $('#modal').modal('toggle');
+                }
+            };
+            let url_mask = "{% url 'edit_key' 12345 %}".replace(12345, keyID); // Manipulator
+            xhr.open('GET', url_mask);
+            xhr.send();
+        }
+    </script>
+</body>
+
+

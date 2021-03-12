@@ -1,0 +1,60 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                {% if user_form == None %}
+                    Opret ny bruger
+                {% else %}
+                    Ret bruger
+                {% endif %}
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="userForm" action="{% if user_form == None %}{% url 'new_user' %}{% else %}{% url 'edit_user' user_form.id %}{% endif %}"
+                  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group d-flex mb-0">
+                    <div class="col-5 pl-0">
+                        <label class="mb-1">Fornavn:</label>
+                        <input id="case-input" class="form-control form-field" type="text" name="input-firstname"
+                               placeholder="" value="{{ user_form.first_name }}">
+                        <p id="case-helptext" class="text-danger" style="display: none;"></p>
+                    </div>
+                    <div class="col-7 pr-0">
+                        <div class="form-group">
+                            <label class="mb-1">Efternavn:</label>
+                            <input id="case-input" class="form-control form-field" type="text" name="input-lastname"
+                                   placeholder="" value="{{ user_form.last_name }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex">
+                    <div class="col-6 pl-0">
+                        <label class="mb-1">Brugernavn:</label>
+                        <input id="case-input" class="form-control form-field" type="text" name="input-username"
+                           placeholder="" value="{{ user_form.username }}">
+                        <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                    </div>
+                    {% if user_form == None %}
+                    <div class="col-6 pr-0 mt-auto">
+                        <label class="mb-1">Adgangskode:</label>
+                        <input id="case-input" class="form-control form-field" type="password" name="input-password">
+                        <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+            {% if user_form != None %}
+                <button type="submit" class="btn btn-primary" form="userForm" value="Submit">Tilføj bruger</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary" form="userForm" value="Submit">Ret bruger</button>
+            {% endif %}
+        </div>
+    </div>
+</div>

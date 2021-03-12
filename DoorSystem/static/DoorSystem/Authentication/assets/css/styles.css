@@ -1,0 +1,11 @@
+#column-one {
+    width: 75% !important;
+    vertical-align: middle;
+}
+
+#column-two {
+    width: 25% !important;
+    font-size: 24px;
+    vertical-align: middle;
+    margin: auto;
+}

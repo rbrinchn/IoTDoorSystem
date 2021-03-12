@@ -1,0 +1,107 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                Opret ny kunde
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'JobTeamAdmin:admin-client-add' %}" method="post" id="addClient">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="mb-1">Navn:</label>
+                    <input id="case-input" class="form-control form-field" type="text" name="client-name"
+                           placeholder="" value="">
+                    <p id="case-helptext" class="text-danger" style="display: none;">F.eks. Byg A/S</p>
+                </div>
+                <div class="form-group">
+                    <label class="mb-1">Kundenummer (samme som i IP):</label>
+                    <input id="case-input" class="form-control form-field" type="text" name="client-id"
+                           placeholder="" value="">
+                    <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                </div>
+                <div class="form-group d-flex mb-0">
+                    <div class="col-6 pl-0">
+                        <div class="form-group mb-0">
+                            <label class="mb-0">Primære kontaktperson:</label>
+                            <div class="dropdown w-100">
+                                <button id="primary-contact-dropdown" class="btn btn-info dropdown-toggle w-100" data-toggle="dropdown"
+                                        aria-expanded="false" type="button">Vælg primære kontakt</button>
+                                <div class="dropdown-menu">
+                                    {% for contact in contacts %}
+                                        <button class="dropdown-item" type="button"
+                                                onclick="PrimarySelectOption(`{{ contact.id }}`, `{{ contact.user.get_full_name }}`)">
+                                            {{ contact.user.get_full_name }}
+                                        </button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <input id="primary-contact-input" type="hidden" name="primary-contact" value="">
+                        </div>
+                    </div>
+                    <div class="col-6 pr-0 mt-auto">
+                        <div class="form-group mb-0">
+                            <label class="mb-0">Sekundær kontaktperson:</label>
+                            <div class="dropdown w-100">
+                                <button id="secondary-contact-dropdown" class="btn btn-info dropdown-toggle w-100" data-toggle="dropdown"
+                                        aria-expanded="false" type="button">Vælg sekundær kontakt</button>
+                                <div class="dropdown-menu">
+                                    {% for contact in contacts %}
+                                        <button class="dropdown-item" type="button"
+                                                onclick="SecondarySelectOption(`{{ contact.id }}`, `{{ contact.user.get_full_name }}`)">
+                                            {{ contact.user.get_full_name }}
+                                        </button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <input id="secondary-contact-input" type="hidden" name="secondary-contact" value="">
+                        </div>
+                    </div>
+                </div>
+
+                {#  SETTINGS  #}
+                <h5 class="mb-0 mt-4">Indstillinger for kunde:</h5>
+                <hr class="mt-0 mb-3">
+                <div class="form-group d-flex mb-0">
+                    <div class="col-6 pl-0">
+                        <div class="form-group mb-0">
+                            <label class="mb-1">Vis før vagt:</label>
+                            <input id="case-input" class="form-control form-field" type="number" name="client-before-shift"
+                                   placeholder="I antal minutter" value="">
+                        </div>
+                    </div>
+                    <div class="col-6 pr-0">
+                        <div class="form-group mb-0">
+                            <label class="mb-1">Vis efter vagt</label>
+                            <input id="case-input" class="form-control form-field" type="number" name="client-after-shift"
+                                   placeholder="I antal minutter" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex mb-0 mt-3">
+                    <div class="col-6 pl-0">
+                        <div class="form-group mb-0">
+                            <label class="mb-1">Rund op ved indtjekning:</label>
+                            <input id="case-input" class="form-control form-field" type="number" name="client-round-up"
+                                   placeholder="I antal minutter" value="">
+                        </div>
+                    </div>
+                    <div class="col-6 pr-0">
+                        <div class="form-group mb-0">
+                            <label class="mb-1">Rund ned ved udtjekning:</label>
+                            <input id="case-input" class="form-control form-field" type="number" name="client-round-down"
+                                   placeholder="I antal minutter" value="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+            <button type="submit" class="btn btn-primary" form="addClient" value="Submit">Opret kunde</button>
+        </div>
+    </div>
+</div>

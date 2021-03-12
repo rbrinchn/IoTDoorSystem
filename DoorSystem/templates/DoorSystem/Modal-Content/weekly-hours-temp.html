@@ -1,0 +1,77 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                Overblik
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Weekday container-->
+            {% for weekday in signatures %}
+                {% if weekday.weekday != "" %}
+                <div class="row mb-2" style="margin: 0px;color: #505e6c;">
+                    <div class="col" style="padding: 10px 15px;">
+                        <div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 style="margin: 0px;">{{ weekday.weekday }}</h4>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <h4 style="margin: 0px;">&nbsp;I alt {{ weekday.totalDuration|floatformat }} t</h4>
+                                </div>
+                            </div>
+                            <hr style="margin: 0px; border-top: 1px solid #505e6c;">
+                            <div class="ml-auto" style="width: 95%">
+                                {% for case in weekday.cases %}
+                                    <div class="row mt-2">
+                                        <div class="col overview-rows">
+                                            {% if case.isSigned %}
+                                                <a data-toggle="tooltip" title="<img class='w-100 bg-white'
+                                                {% if case.signatureClient != "" %}
+                                                    src='{{ case.signatureClient }}' />">
+                                                {% else %}
+                                                    src='{{ case.signatureTemp }}' />">
+                                                {% endif %}
+                                                    <p style="margin: 0px;"><i class="fas fa-check text-success"></i> {{ case.case_id }}</p>
+                                                </a>
+                                            {% else %}
+                                                <a data-toggle="tooltip" title="<img src='{{ case.signatureTemp }}' />">
+                                                    <p style="margin: 0px;"><i class="fas fa-times text-danger"></i> {{ case.case_id }}</p>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-7 overview-rows">
+                                            <div class="row ml-auto" style="max-width: 420px; width: 420px;">
+                                                <!-- From, to timestamp -->
+                                                <div class="col">
+                                                    <p class="mb-0" style="text-align: right;"><i class="far fa-clock"></i> {{ case.fromTime }} - {{ case.toTime }}</p>
+                                                </div>
+                                                <!-- Pause -->
+                                                <div class="col" style="max-width: 100px;">
+                                                    <p class="mb-0" style="text-align: right;"><i class="fas fa-coffee"></i> {{ case.pauseInMin }} min</p>
+                                                </div>
+                                                <!-- Total duration -->
+                                                <div class="col" style="max-width: 75px;">
+                                                    <p class="mb-0 font-weight-bold text-center">{{ case.totalDuration|floatformat }} t</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr style="margin: 0px; border-top: 1.5px dashed #394448;">
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+            {#<button type="button" class="btn btn-primary">Save changes</button>#}
+        </div>
+    </div>
+</div>

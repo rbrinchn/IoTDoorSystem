@@ -19,6 +19,17 @@ from DoorSystem import views as system
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', system.test_render, name="test_url"),
     path('', system.index_render, name="index"),
+    path('dashboard/', system.dashboard_render, name="dashboard"),
+    path('login/', system.login_render, name="login"),
+    path('logout/', system.logout_user, name="logout"),
+    path('users/', system.users_render, name='user_overview'),
+    path('users/add/', system.create_new_user, name="new_user"),
+    path('user/edit/<str:user_id>/', system.create_new_user, name="edit_user"),
+    path('virtual_keys/', system.virtual_key_render, name='keys_overview'),
+    path('virtual_keys/add/', system.virtual_key_modal, name="new_key"),
+    path('virtual_keys/edit/<str:key_id>', system.virtual_key_modal, name="edit_key"),
+    path('test/', system.test_render, name="test_url"),
+
+
 ]

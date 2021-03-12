@@ -1,0 +1,70 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                {% if virtual_key == None %}
+                    Opret ny nøgle
+                {% else %}
+                    Rediger nøgle
+                {% endif %}
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="keyForm"
+                  action="{% if virtual_key == None %}{% url 'new_key' %}{% else %}{% url 'edit_key' virtual_key.id %}{% endif %}"
+                  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group d-flex">
+                    <div class="col-5 pl-0">
+                        <label class="mb-1">Brugernavn:</label>
+                        <input id="case-input" class="form-control form-field" type="text" name="input-username"
+                           placeholder="" value="{{ virtual_key.user.username }}">
+                        <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                    </div>
+                    {# No password field in edit format #}
+                    {% if virtual_key == None  %}
+                    <div class="col-6 pr-0 mt-auto">
+                        <label class="mb-1">Adgangskode:</label>
+                        <input id="case-input" class="form-control form-field" type="password" name="input-password"
+                           placeholder="" value="">
+                        <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                    </div>
+                    {% else %}
+                        <div class="col-6 pr-0 mt-auto">
+                        <label class="mb-1">Ny adgangskode:</label>
+                        <input id="case-input" class="form-control form-field" type="password" name="input-password"
+                           placeholder="" value="">
+                        <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <label class="mb-1">Aktiv fra:</label>
+                        <input id="case-input" class="form-control form-field text-center"
+                               type="datetime-local" name="input-active-from" placeholder=""
+                               value="{{virtual_key.active_from|date:'Y-m-d'}}T{{virtual_key.active_from|time:'H:i:s'}}"/>
+
+                    </div>
+                    <div class="col-6">
+                        <label class="mb-1">Aktiv til:</label>
+                        <input id="case-input" class="form-control form-field text-center"
+                               type="datetime-local" name="input-active-to" placeholder=""
+                               value="{{virtual_key.active_to|date:'Y-m-d'}}T{{virtual_key.active_to|time:'H:i:s'}}"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+            {% if virtual_key == None %}
+                <button type="submit" class="btn btn-primary" form="keyForm" value="Submit">Tilføj nøgle</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary" form="keyForm" value="Submit">Rediger nøgle</button>
+            {% endif %}
+        </div>
+    </div>
+</div>

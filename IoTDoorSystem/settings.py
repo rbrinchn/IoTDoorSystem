@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ywfu&9_t1%13a71dp^@&6e7+^y9=qjtrsqs!g9o9-$5k)3j2_!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'brinchv2.pythonanywhere.com']
 
 
 # Application definition

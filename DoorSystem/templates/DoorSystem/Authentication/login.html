@@ -1,0 +1,41 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    {# Full screen iOS #}
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/fonts/simple-line-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/css/Navigation-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'DoorSystem/Authentication/assets/css/styles.css' %}">
+</head>
+
+<body>
+    <div class="login-clean min-vh-100 min-vw-100">
+        <form method="post">
+            {% csrf_token %}
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration">
+                <div class="sidebar-brand-icon"><i class="fas fa-door-open my-3" style="font-size: 5rem !important;"></i></div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="username" placeholder="Brugernavn">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+                <p id="errorMessage" class="ml-2 mt-2" style="font-size: 0.9rem">{{ error_message }}</p>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Log In</button>
+            </div>
+{#            <a class="text-info" href="{% url 'reset_password' %}">Glemt din adgangskode?</a>#}
+        </form>
+    </div>
+    <script src="{% static 'DoorSystem/Authentication/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'DoorSystem/Authentication/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>

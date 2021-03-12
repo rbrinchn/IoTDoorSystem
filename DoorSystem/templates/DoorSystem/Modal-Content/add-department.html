@@ -1,0 +1,26 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                Opret ny afdeling
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'JobTeamAdmin:admin-add-department' %}" method="post" id="addDepartment">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="mb-1">Afdelingsnavn:</label>
+                    <input id="case-input" class="form-control form-field" type="text" name="department-name"
+                           placeholder="" value="">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+            <button type="submit" class="btn btn-primary" form="addDepartment" value="Submit">Opret Afdeling</button>
+        </div>
+    </div>
+</div>

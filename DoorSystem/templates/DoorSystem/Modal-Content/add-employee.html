@@ -1,0 +1,90 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                Tilføj Medarbejder
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="addEmployee" action="{% url 'JobTeamAdmin:admin-add-employee' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group d-flex mb-3">
+                    <div class="col-8 pl-0">
+                        <label class="mb-1">Email / Brugernavn:</label>
+                        <input id="case-input" class="form-control form-field" type="email" name="employee-email"
+                               placeholder="" value="{{ employee.user.first_name }}">
+                        <p id="case-helptext" class="text-danger" style="display: none;"></p>
+                    </div>
+                </div>
+                <div class="form-group d-flex mb-0">
+                    <div class="col-6 pl-0">
+                        <label class="mb-1">Fornavn:</label>
+                        <input id="case-input" class="form-control form-field" type="text" name="employee-firstName"
+                               placeholder="" value="{{ employee.user.first_name }}">
+                        <p id="case-helptext" class="text-danger" style="display: none;"></p>
+                    </div>
+                    <div class="col-6 pr-0">
+                        <div class="form-group">
+                            <label class="mb-1">Efternavn:</label>
+                            <input id="case-input" class="form-control form-field" type="text" name="employee-lastName"
+                                   placeholder="" value="{{ employee.user.last_name }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex">
+                    <div class="col-6 pl-0">
+                        <label class="mb-1">Telefon:</label>
+                        <input id="case-input" class="form-control form-field" type="text" name="employee-phone"
+                           placeholder="" value="{{ employee.phone }}">
+                        <p id="case-helptext" class="text-danger" style="display: none;">91063429</p>
+                    </div>
+                    <div class="col-6 pr-0 mt-auto">
+                        <div class="form-group mb-0">
+                            <div class="dropdown w-100">
+                                <button id="department-dropdown" class="btn btn-info dropdown-toggle w-100" data-toggle="dropdown"
+                                        aria-expanded="false" type="button">
+                                    {% if employee.primaryDepartment == None %}
+                                        Vælg Afdeling
+                                    {% else %}
+                                        {{ employee.primaryDepartment }}
+                                    {% endif %}
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    {% for department in departments %}
+                                        <button class="dropdown-item" type="button"
+                                                onclick="SelectOption(`{{ department.id }}`, `{{ department.departmentName }}`)">
+                                            {{ department.departmentName }}
+                                        </button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <input id="department-input" type="hidden" name="employee-department" value="{{ employee.primaryDepartment.id }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex mb-0">
+
+                </div>
+                <div class="form-group">
+                    <div class="col">
+                        <label>Profilbillede:</label>
+                        <div class="">
+                            <img src="{{ employee.profilePicture.url }}" style="max-width: 200px;">
+                        </div>
+                        <div class="mt-2">
+                            <input type="file" name="employee-profile-picture">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+            <button type="submit" class="btn btn-primary" form="addEmployee" value="Submit">Tilføj medarbejder</button>
+        </div>
+    </div>
+</div>
