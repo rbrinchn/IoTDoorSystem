@@ -32,7 +32,9 @@ def login_render(request):
         return render(request, 'DoorSystem/Authentication/login.html')
     elif request.method == "POST":
         username = request.POST['username']
-        user = authenticate(request, username=username, password=request.POST['password'])
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        print(str("USER: ") + str(user))
         # User is only none if the username or password was incorrect
         if user is None:
             request.method = "GET"
@@ -52,6 +54,7 @@ def login_render(request):
 
             # Checks for virtual key
             if user.is_active and (user.is_staff or user.is_superuser):
+                print("HIIII")
                 return redirect('index')
             elif user.is_active:  # User is active - meaning it's a virtual key
                 key = VirtualKey.objects.get(user=user)
@@ -90,7 +93,7 @@ def create_new_user(request, user_id=0):
         if user_id == 0:
             username = request.POST['input-username']
             password = request.POST['input-password']
-            user = User.objects.create(username=username, password=password)
+            user = User.objects.create_user(username=username, password=password)
             user.first_name = request.POST['input-firstname']
             user.last_name = request.POST['input-lastname']
             user.is_active = True
